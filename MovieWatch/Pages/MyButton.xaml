@@ -1,0 +1,36 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieWatch.Pages.MyButton">
+
+    <Border x:Name="OuterBox"
+            BackgroundColor="#424242"
+            StrokeThickness="2"
+            Stroke="Black"
+            Padding="0,0,0,12"
+            HeightRequest="60"
+            WidthRequest="110">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="0"/>
+        </Border.StrokeShape>
+
+        <Border x:Name="InnerBox"
+                BackgroundColor="#dddddd"
+                Stroke="White"
+                StrokeThickness="5"
+                Padding="8,3">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0"/>
+            </Border.StrokeShape>
+
+            <Label x:Name="ButtonLabel"
+                   Text="Click Me"
+                   TextColor="Black"
+                   FontFamily="Rajdhani Bold"
+                   FontSize="20"
+                   CharacterSpacing="1"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Border>
+    </Border>
+
+</ContentView>

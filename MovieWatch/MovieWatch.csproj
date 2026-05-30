@@ -1,0 +1,119 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+		<!--
+			REMOVED: the old template line below was the cause of XA0035.
+			When VS builds in Release it evaluates RuntimeIdentifier=win-x64 globally.
+			That condition was true, which meant the value 'win-x64' bled into the
+			Android build and the Android tooling couldn't map it to an ABI.
+
+			<TargetFrameworks Condition="'$(RuntimeIdentifier)' == 'win-x64' or ...">
+				net10.0-windows10.0.19041.0
+			</TargetFrameworks>
+		-->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>MovieWatch</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>MovieWatch</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.moviewatch</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<WindowsPackageType>None</WindowsPackageType>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<!-- Android: only valid Android ABIs, evaluated only when building for Android -->
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<RuntimeIdentifiers>android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
+	</PropertyGroup>
+
+	<!-- Windows: explicit single RID so VS doesn't inject one globally -->
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="14.1.1" />
+		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.1.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.70" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.8" />
+		<PackageReference Include="Microsoft.Maui.Core" Version="10.0.70" />
+		<PackageReference Include="PusherClient" Version="2.2.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Microsoft.Maui.Controls">
+	    <HintPath>..\..\..\..\.nuget\packages\microsoft.maui.controls.core\10.0.70\lib\net10.0-ios26.0\Microsoft.Maui.Controls.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<!--
+		Linker.xml tells the Release-mode IL trimmer to preserve these assemblies.
+		PusherClient and Newtonsoft.Json rely on reflection for event binding and
+		JSON serialisation — without this they get partially stripped and crash at runtime.
+	-->
+	<ItemGroup>
+		<TrimmerRootDescriptor Include="Linker.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Pages\MyButton.xaml.cs">
+			<DependentUpon>MyButton.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\VideoPlayer.xaml.cs">
+			<DependentUpon>VideoPlayer.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\UpdateProgressPage.xaml.cs">
+			<DependentUpon>UpdateProgressPage.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="Pages\MyButton.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\VideoPlayer.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\UpdateProgressPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	</ItemGroup>
+
+</Project>

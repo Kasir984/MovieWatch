@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Place this file at the project root (same folder as MovieWatch.csproj).
+
+    The Release build enables the IL Linker (trimmer) which strips types and
+    members it can't statically prove are used. PusherClient uses reflection
+    to bind channel events, and Newtonsoft.Json / WebSocketSharp are used
+    internally — the trimmer can't see these usages and removes them.
+
+    This file tells the trimmer to keep those assemblies intact.
+-->
+<linker>
+	<assembly fullname="PusherClient"    preserve="all" />
+	<assembly fullname="Newtonsoft.Json" preserve="all" />
+	<assembly fullname="WebSocketSharp"  preserve="all" />
+</linker>

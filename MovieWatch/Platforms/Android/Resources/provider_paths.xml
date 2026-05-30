@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Place this file at:
+        Platforms/Android/Resources/xml/provider_paths.xml
+
+    It tells FileProvider which directories it is allowed to share URIs for.
+    The MAUI CacheDirectory maps to the internal app cache (getCacheDir()),
+    which is represented here as <cache-path>.
+-->
+<paths>
+	<cache-path name="cache" path="." />
+</paths>
