@@ -26,9 +26,8 @@ public partial class UpdateProgressPage : ContentPage {
         try {
             await UpdateService.DownloadAndInstallAsync(_downloadUrl, progress, _cts.Token);
 
-            // Hand-off to OS installer
             MainThread.BeginInvokeOnMainThread(() => {
-                StatusLabel.Text = "Installing — follow the on-screen prompt.";
+                StatusLabel.Text = "Installing - follow the on-screen prompt.";
                 CancelButton.IsEnabled = false;
             });
         } catch (OperationCanceledException) {

@@ -7,7 +7,7 @@ namespace MovieWatch {
             var builder = MauiApp.CreateBuilder()
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
-                .UseMauiCommunityToolkitMediaElement();
+                .UseMauiCommunityToolkitMediaElement(false);
 
             builder.ConfigureFonts(fonts =>
             {

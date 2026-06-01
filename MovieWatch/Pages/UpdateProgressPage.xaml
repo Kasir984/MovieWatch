@@ -1,6 +1,62 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Window xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MovieWatch.Pages.NewWindow1"
-             Title="NewWindow1">
-</Window>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MovieWatch.Pages.UpdateProgressPage"
+             BackgroundColor="#0C0C0F">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0C0C0F" Offset="0.00" />
+                <GradientStop Color="#1b1a1f" Offset="0.40" />
+                <GradientStop Color="#3e3d42" Offset="1.00" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <VerticalStackLayout VerticalOptions="Center"
+                             HorizontalOptions="Fill"
+                             Spacing="28"
+                             Padding="40,0">
+
+            <!-- Title -->
+            <Label Text="Downloading Update"
+                   TextColor="White"
+                   FontFamily="Rajdhani Semibold"
+                   FontSize="28"
+                   HorizontalOptions="Center" />
+
+            <!-- Divider line, matching MainPage style -->
+            <Line X1="0" Y1="0" X2="200" Y2="0"
+                  Stroke="White"
+                  StrokeThickness="2"
+                  HorizontalOptions="Center" />
+
+            <!-- Progress bar -->
+            <ProgressBar x:Name="UpdateProgressBar"
+                         ProgressColor="White"
+                         HorizontalOptions="Fill"
+                         HeightRequest="6" />
+
+            <!-- Status text -->
+            <Label x:Name="StatusLabel"
+                   Text="Preparing download..."
+                   TextColor="White"
+                   FontFamily="Rajdhani Medium"
+                   FontSize="18"
+                   HorizontalOptions="Center" />
+
+            <!-- Cancel button — reuses the same style as other buttons in the overlay panels -->
+            <Button x:Name="CancelButton"
+                    Text="Cancel"
+                    BackgroundColor="#424242"
+                    TextColor="White"
+                    FontFamily="Rajdhani Semibold"
+                    FontSize="16"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    Clicked="OnCancelClicked" />
+
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
