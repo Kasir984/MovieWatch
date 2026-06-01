@@ -1,14 +1,16 @@
-﻿using Microsoft.UI.Xaml;
+﻿
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+#pragma warning disable IDE0130
 namespace MovieWatch.WinUI
+#pragma warning restore IDE0130
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public partial class App : MauiWinUIApplication
+    public partial class App
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

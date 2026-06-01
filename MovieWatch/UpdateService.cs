@@ -4,8 +4,8 @@ namespace MovieWatch;
 
 public static class UpdateService {
     // ── ✏️  Change these to match your GitHub repo ─────────────────────────────
-    private const string GitHubOwner = "YOUR_GITHUB_USERNAME";
-    private const string GitHubRepo = "YOUR_REPO_NAME";
+    private const string GitHubOwner = "Kasir984";
+    private const string GitHubRepo = "MovieWatch";
 
     // Name of the asset attached to each GitHub release:
     //   Android → upload the .apk as "MovieWatch.apk"

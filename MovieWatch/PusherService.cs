@@ -210,7 +210,7 @@ namespace MovieWatch {
 
             // ReSharper disable once UnusedVariable
             var response = await Http.PostAsync(url,
-                new System.Net.Http.StringContent(body, Encoding.UTF8, "application/json"));
+                new StringContent(body, Encoding.UTF8, "application/json"));
             // System.Diagnostics.Debug.WriteLine($"Pusher: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
         }
 

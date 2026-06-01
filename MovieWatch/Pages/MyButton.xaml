@@ -13,8 +13,8 @@
             <RoundRectangle CornerRadius="0"/>
         </Border.StrokeShape>
 
-        <Border x:Name="InnerBox"
-                BackgroundColor="#dddddd"
+        <Border
+            BackgroundColor="#dddddd"
                 Stroke="White"
                 StrokeThickness="5"
                 Padding="8,3">

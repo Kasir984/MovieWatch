@@ -2,32 +2,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MovieWatch.Pages"
              x:Class="MovieWatch.Pages.MainPage">
-    <Grid>
+    <Grid SafeAreaEdges="None">
         <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#0C0C0F" Offset="0.00" />
-                <GradientStop Color="#111116" Offset="0.07" />
-                <GradientStop Color="#17161a" Offset="0.14" />
-                <GradientStop Color="#1b1a1f" Offset="0.21" />
-                <GradientStop Color="#201f23" Offset="0.28" />
-                <GradientStop Color="#242327" Offset="0.35" />
-                <GradientStop Color="#28272b" Offset="0.42" />
-                <GradientStop Color="#2c2b2f" Offset="0.49" />
-                <GradientStop Color="#302f33" Offset="0.56" />
-                <GradientStop Color="#333237" Offset="0.63" />
-                <GradientStop Color="#37363a" Offset="0.7" />
-                <GradientStop Color="#39383d" Offset="0.77" />
-                <GradientStop Color="#3c3b40" Offset="0.84" />
-                <GradientStop Color="#3e3d42" Offset="1.00" />
-            </LinearGradientBrush>
+            <RadialGradientBrush Center="0.5,1.0" Radius="1.0">
+                <GradientStop Color="#321b35" Offset="0.0" />
+                <GradientStop Color="#090a0f" Offset="1.0" />
+            </RadialGradientBrush>
         </Grid.Background>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="90" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="120" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <GraphicsView x:Name="StarCanvas"
+                      Grid.Row="0"
+                      Grid.RowSpan="4"
+                      Grid.Column="0"
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Fill"
+                      ZIndex="-1" />
 
         <Border Grid.Row="0" Stroke="Transparent">
             <Label HorizontalOptions="Center"
@@ -56,12 +52,21 @@
                TextColor="White"
                Text="Press to check if second person is ready." />
 
+        <Label Grid.Row="3"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="12"
+               Padding="0,0,0,0"
+               FontFamily="LobsterTwo"
+               TextColor="DarkSalmon"
+               Text="Now we can finally watch whatever movies we want."/>
+
         <!-- Use MyButton here instead of raw Border -->
         <local:MyButton Grid.Row="2"
                         Text="Test"
                         HorizontalOptions="Center"
-                        VerticalOptions="Start" 
-                        Clicked="OnButtonClicked"/>
+                        VerticalOptions="Start"
+                        Clicked="OnButtonClicked" />
 
         <Label x:Name="LblResult"
                Grid.Row="3"
@@ -75,78 +80,79 @@
 
         <Grid x:Name="VideoSetupOverlay"
               Grid.Row="0" Grid.RowSpan="4"
-   IsVisible="False"
-   BackgroundColor="#EE0C0C0F">
+              IsVisible="False"
+              BackgroundColor="#EE0C0C0F">
+            
 
             <!-- Who Picks Panel -->
             <VerticalStackLayout x:Name="WhoPicksPanel" IsVisible="False"
-                      VerticalOptions="Center" HorizontalOptions="Center"
-                      Spacing="25" Padding="30">
+                                 VerticalOptions="Center" HorizontalOptions="Center"
+                                 Spacing="25" Padding="30">
                 <Label Text="Who picks the video?"
-            TextColor="White" FontFamily="Rajdhani Semibold"
-            FontSize="24" HorizontalOptions="Center"/>
+                       TextColor="White" FontFamily="Rajdhani Semibold"
+                       FontSize="24" HorizontalOptions="Center" />
                 <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                    <Button Text="Me"      Clicked="OnMeClicked"      WidthRequest="120" HeightRequest="50"/>
-                    <Button Text="Partner" Clicked="OnPartnerClicked" WidthRequest="120" HeightRequest="50"/>
+                    <Button Text="Me" Clicked="OnMeClicked" WidthRequest="120" HeightRequest="50" />
+                    <Button Text="Partner" Clicked="OnPartnerClicked" WidthRequest="120" HeightRequest="50" />
                 </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <!-- Waiting Panel -->
             <VerticalStackLayout x:Name="WaitingPanel" IsVisible="False"
-                      VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
-                <ActivityIndicator IsRunning="True" Color="White" WidthRequest="50" HeightRequest="50"/>
+                                 VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+                <ActivityIndicator IsRunning="True" Color="White" WidthRequest="50" HeightRequest="50" />
                 <Label x:Name="WaitingLabel" Text="Waiting..."
-            TextColor="White" FontFamily="Rajdhani Medium"
-            FontSize="18" HorizontalOptions="Center"/>
+                       TextColor="White" FontFamily="Rajdhani Medium"
+                       FontSize="18" HorizontalOptions="Center" />
             </VerticalStackLayout>
 
             <!-- Pick Video Panel -->
             <VerticalStackLayout x:Name="PickVideoPanel" IsVisible="False"
-                      VerticalOptions="Center" HorizontalOptions="Center"
-                      Spacing="20" Padding="30">
+                                 VerticalOptions="Center" HorizontalOptions="Center"
+                                 Spacing="20" Padding="30">
                 <Label x:Name="PickVideoLabel" Text="Select the video file"
-            TextColor="White" FontFamily="Rajdhani Semibold"
-            FontSize="22" HorizontalOptions="Center"/>
+                       TextColor="White" FontFamily="Rajdhani Semibold"
+                       FontSize="22" HorizontalOptions="Center" />
                 <Label x:Name="PickVideoSubLabel" Text=""
-            TextColor="#AAAAAA" FontFamily="Rajdhani Medium"
-            FontSize="14" HorizontalOptions="Center"/>
-                <Button Text="Browse" Clicked="OnBrowseClicked" WidthRequest="150" HeightRequest="50"/>
+                       TextColor="#AAAAAA" FontFamily="Rajdhani Medium"
+                       FontSize="14" HorizontalOptions="Center" />
+                <Button Text="Browse" Clicked="OnBrowseClicked" WidthRequest="150" HeightRequest="50" />
             </VerticalStackLayout>
 
             <!-- Verifying Panel -->
             <VerticalStackLayout x:Name="VerifyingPanel" IsVisible="False"
-                      VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
-                <ActivityIndicator IsRunning="True" Color="White" WidthRequest="50" HeightRequest="50"/>
+                                 VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+                <ActivityIndicator IsRunning="True" Color="White" WidthRequest="50" HeightRequest="50" />
                 <Label x:Name="VerifyingLabel" Text="Calculating checksum..."
-            TextColor="White" FontFamily="Rajdhani Medium"
-            FontSize="18" HorizontalOptions="Center"/>
+                       TextColor="White" FontFamily="Rajdhani Medium"
+                       FontSize="18" HorizontalOptions="Center" />
             </VerticalStackLayout>
 
             <!-- Mismatch Panel -->
             <VerticalStackLayout x:Name="MismatchPanel" IsVisible="False"
-                      VerticalOptions="Center" HorizontalOptions="Center"
-                      Spacing="20" Padding="30">
+                                 VerticalOptions="Center" HorizontalOptions="Center"
+                                 Spacing="20" Padding="30">
                 <Label Text="❌ Files don't match"
-            TextColor="#FF4444" FontFamily="Rajdhani Semibold"
-            FontSize="24" HorizontalOptions="Center"/>
+                       TextColor="#FF4444" FontFamily="Rajdhani Semibold"
+                       FontSize="24" HorizontalOptions="Center" />
                 <Label Text="Please select the correct video file"
-            TextColor="White" FontFamily="Rajdhani Medium"
-            FontSize="16" HorizontalOptions="Center"/>
-                <Button Text="Re-pick" Clicked="OnBrowseClicked" WidthRequest="150" HeightRequest="50"/>
+                       TextColor="White" FontFamily="Rajdhani Medium"
+                       FontSize="16" HorizontalOptions="Center" />
+                <Button Text="Re-pick" Clicked="OnBrowseClicked" WidthRequest="150" HeightRequest="50" />
             </VerticalStackLayout>
 
             <!-- Ready Panel -->
             <VerticalStackLayout x:Name="ReadyPanel" IsVisible="False"
-                      VerticalOptions="Center" HorizontalOptions="Center"
-                      Spacing="20" Padding="30">
+                                 VerticalOptions="Center" HorizontalOptions="Center"
+                                 Spacing="20" Padding="30">
                 <Label Text="✅ Files match!"
-            TextColor="#44FF44" FontFamily="Rajdhani Semibold"
-            FontSize="24" HorizontalOptions="Center"/>
+                       TextColor="#44FF44" FontFamily="Rajdhani Semibold"
+                       FontSize="24" HorizontalOptions="Center" />
                 <Label x:Name="ReadyStatusLabel" Text="Press Ready when you are ready"
-            TextColor="White" FontFamily="Rajdhani Medium"
-            FontSize="16" HorizontalOptions="Center"/>
+                       TextColor="White" FontFamily="Rajdhani Medium"
+                       FontSize="16" HorizontalOptions="Center" />
                 <Button x:Name="ReadyButton" Text="Ready"
-             Clicked="OnReadyClicked" WidthRequest="150" HeightRequest="50"/>
+                        Clicked="OnReadyClicked" WidthRequest="150" HeightRequest="50" />
             </VerticalStackLayout>
 
         </Grid>

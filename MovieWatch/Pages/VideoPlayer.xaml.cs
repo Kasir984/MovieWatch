@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Maui.Core.Primitives;
 using CommunityToolkit.Maui.Views;
 
 namespace MovieWatch.Pages;

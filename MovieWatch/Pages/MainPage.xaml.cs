@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CS0618  // suppress obsolete-API warnings for legacy MAUI gesture / navigation calls
 
+
 namespace MovieWatch.Pages {
     public partial class MainPage {
         private bool _iAmPicker;
@@ -10,10 +11,79 @@ namespace MovieWatch.Pages {
         private bool _setupStarted;
         private bool _initialized;
         private string? _selectedFilePath;
+        public StarFieldDrawable Drawable { get; }
+        private const bool IsAnimating = true;
+
+        private readonly Star[] _stars;
 
         public MainPage() {
             InitializeComponent();
+
+            var existingStars = new Star[]
+            {
+                new(501, 811, 0.5f), new(1450, 1324, 1.2f), new(1093, 1780, 0.8f),
+                new(1469, 678, 2.0f), new(904, 741, 0.3f), new(1160, 781, 1.5f),
+                new(1841, 1962, 0.9f), new(1630, 1667, 1.1f), new(1788, 676, 0.6f),
+                new(367, 1734, 1.4f), new(1343, 156, 0.4f), new(1283, 1142, 1.7f),
+                new(1062, 378, 0.5f), new(1395, 467, 1.2f), new(1017, 1891, 0.8f),
+                new(137, 1114, 2.1f), new(1767, 1403, 1.3f), new(1543, 11, 0.2f),
+                new(1078, 181, 0.7f), new(1189, 1574, 1.6f),
+                // Add your remaining points inside 'new Star(X, Y, Speed)' format
+            };
+
+            _stars = existingStars.Concat(GenerateRandomStars(80)).ToArray();
+            
             _ = InitializePusher();
+            Drawable = new StarFieldDrawable(_stars);
+            StarCanvas.Drawable = Drawable;
+            StartAnimationLoop();
+        }
+
+        private static Star[] GenerateRandomStars(int count)
+        {
+            var random = new Random();
+            var displayInfo = DeviceDisplay.Current.MainDisplayInfo;
+            var screenWidth = (int)displayInfo.Width;
+            var screenHeight = (int)displayInfo.Height;
+
+            var stars = new Star[count];
+            for (var i = 0; i < count; i++)
+            {
+                stars[i] = new Star(
+                    random.Next(0, screenWidth),
+                    random.Next(0, screenHeight),
+                    (float)(random.NextDouble() * 2.0 + 0.2f)
+                );
+            }
+
+            return stars;
+        }
+        
+
+        private async void StartAnimationLoop()
+        {
+            try
+            {
+                while (IsAnimating) {
+
+                    foreach (var star in _stars)
+                    {
+                        star.Y += star.Speed;
+
+                        if (star.Y > 2000)
+                        {
+                            star.Y = 0;
+                        }
+                    }
+                    StarCanvas.Invalidate();
+
+                    await Task.Delay(16);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine($"Exception Caught: {e}");
+            }
         }
 
         private async Task InitializePusher() {
@@ -160,7 +230,7 @@ namespace MovieWatch.Pages {
                 if (result == null) return;
                 await ProcessVideoFile(result.FullPath);
             } catch (Exception ex) {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await DisplayAlertAsync("Error", ex.Message, "OK");
             }
         }
 

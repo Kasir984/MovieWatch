@@ -12,5 +12,4 @@
 <linker>
 	<assembly fullname="PusherClient"    preserve="all" />
 	<assembly fullname="Newtonsoft.Json" preserve="all" />
-	<assembly fullname="WebSocketSharp"  preserve="all" />
 </linker>

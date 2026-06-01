@@ -26,7 +26,7 @@ namespace MovieWatch {
                 var page = Application.Current?.Windows[0].Page;
                 if (page is null) return;
 
-                var confirmed = await page.DisplayAlert(
+                var confirmed = await page.DisplayAlertAsync(
                     "Update Available 🎉",
                     $"Version {update.Version} is available.\nWould you like to download and install it now?",
                     "Update Now",

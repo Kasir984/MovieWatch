@@ -1,6 +1,7 @@
 namespace MovieWatch.Pages;
 
-public partial class UpdateProgressPage : ContentPage {
+public partial class UpdateProgressPage
+{
     private readonly string _downloadUrl;
     private CancellationTokenSource? _cts;
 
@@ -35,7 +36,7 @@ public partial class UpdateProgressPage : ContentPage {
         } catch (Exception ex) {
             System.Diagnostics.Debug.WriteLine($"[Update] Download error: {ex}");
             await MainThread.InvokeOnMainThreadAsync(async () => {
-                await DisplayAlert(
+                await DisplayAlertAsync(
                     "Update Failed",
                     "Could not download the update. Please try again later.",
                     "OK");
