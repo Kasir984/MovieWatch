@@ -57,7 +57,7 @@
                VerticalOptions="Center"
                FontSize="12"
                Padding="0,0,0,0"
-               FontFamily="LobsterTwo"
+               FontFamily="LobsterTwo Regular"
                TextColor="DarkSalmon"
                Text="Now we can finally watch whatever movies we want."/>
 
