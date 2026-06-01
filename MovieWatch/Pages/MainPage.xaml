@@ -28,7 +28,7 @@
         <Border Grid.Row="0" Stroke="Transparent">
             <Label HorizontalOptions="Center"
                    VerticalOptions="Start"
-                   FontFamily="Rajdhani Semibold"
+                   FontFamily="RajdhaniSemiBold"
                    FontSize="30"
                    Padding="0,30,0,0"
                    TextColor="White"
@@ -48,7 +48,7 @@
                Padding="0,0,0,40"
                TextDecorations="Underline"
                FontSize="18"
-               FontFamily="Rajdhani Medium"
+               FontFamily="RajdhaniMedium"
                TextColor="White"
                Text="Press to check if second person is ready." />
 
@@ -57,7 +57,7 @@
                VerticalOptions="Center"
                FontSize="12"
                Padding="0,0,0,0"
-               FontFamily="LobsterTwo Regular"
+               FontFamily="LobsterTwoRegular"
                TextColor="DarkSalmon"
                Text="Now we can finally watch whatever movies we want."/>
 
@@ -72,7 +72,7 @@
                Grid.Row="3"
                IsVisible="False"
                FontSize="18"
-               FontFamily="Jetbrains Mono SemiBold"
+               FontFamily="JetBrainsMonoSemiBold"
                Text="test"
                VerticalOptions="Start"
                HorizontalOptions="Center"
@@ -89,7 +89,7 @@
                                  VerticalOptions="Center" HorizontalOptions="Center"
                                  Spacing="25" Padding="30">
                 <Label Text="Who picks the video?"
-                       TextColor="White" FontFamily="Rajdhani Semibold"
+                       TextColor="White" FontFamily="RajdhaniSemiBold"
                        FontSize="24" HorizontalOptions="Center" />
                 <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
                     <Button Text="Me" Clicked="OnMeClicked" WidthRequest="120" HeightRequest="50" />
@@ -102,7 +102,7 @@
                                  VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
                 <ActivityIndicator IsRunning="True" Color="White" WidthRequest="50" HeightRequest="50" />
                 <Label x:Name="WaitingLabel" Text="Waiting..."
-                       TextColor="White" FontFamily="Rajdhani Medium"
+                       TextColor="White" FontFamily="RajdhaniMedium"
                        FontSize="18" HorizontalOptions="Center" />
             </VerticalStackLayout>
 
@@ -111,10 +111,10 @@
                                  VerticalOptions="Center" HorizontalOptions="Center"
                                  Spacing="20" Padding="30">
                 <Label x:Name="PickVideoLabel" Text="Select the video file"
-                       TextColor="White" FontFamily="Rajdhani Semibold"
+                       TextColor="White" FontFamily="RajdhaniSemiBold"
                        FontSize="22" HorizontalOptions="Center" />
                 <Label x:Name="PickVideoSubLabel" Text=""
-                       TextColor="#AAAAAA" FontFamily="Rajdhani Medium"
+                       TextColor="#AAAAAA" FontFamily="RajdhaniMedium"
                        FontSize="14" HorizontalOptions="Center" />
                 <Button Text="Browse" Clicked="OnBrowseClicked" WidthRequest="150" HeightRequest="50" />
             </VerticalStackLayout>
@@ -124,7 +124,7 @@
                                  VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
                 <ActivityIndicator IsRunning="True" Color="White" WidthRequest="50" HeightRequest="50" />
                 <Label x:Name="VerifyingLabel" Text="Calculating checksum..."
-                       TextColor="White" FontFamily="Rajdhani Medium"
+                       TextColor="White" FontFamily="RajdhaniMedium"
                        FontSize="18" HorizontalOptions="Center" />
             </VerticalStackLayout>
 
@@ -133,10 +133,10 @@
                                  VerticalOptions="Center" HorizontalOptions="Center"
                                  Spacing="20" Padding="30">
                 <Label Text="❌ Files don't match"
-                       TextColor="#FF4444" FontFamily="Rajdhani Semibold"
+                       TextColor="#FF4444" FontFamily="RajdhaniSemiBold"
                        FontSize="24" HorizontalOptions="Center" />
                 <Label Text="Please select the correct video file"
-                       TextColor="White" FontFamily="Rajdhani Medium"
+                       TextColor="White" FontFamily="RajdhaniMedium"
                        FontSize="16" HorizontalOptions="Center" />
                 <Button Text="Re-pick" Clicked="OnBrowseClicked" WidthRequest="150" HeightRequest="50" />
             </VerticalStackLayout>
@@ -146,10 +146,10 @@
                                  VerticalOptions="Center" HorizontalOptions="Center"
                                  Spacing="20" Padding="30">
                 <Label Text="✅ Files match!"
-                       TextColor="#44FF44" FontFamily="Rajdhani Semibold"
+                       TextColor="#44FF44" FontFamily="RajdhaniSemiBold"
                        FontSize="24" HorizontalOptions="Center" />
                 <Label x:Name="ReadyStatusLabel" Text="Press Ready when you are ready"
-                       TextColor="White" FontFamily="Rajdhani Medium"
+                       TextColor="White" FontFamily="RajdhaniMedium"
                        FontSize="16" HorizontalOptions="Center" />
                 <Button x:Name="ReadyButton" Text="Ready"
                         Clicked="OnReadyClicked" WidthRequest="150" HeightRequest="50" />

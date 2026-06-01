@@ -8,6 +8,7 @@
     <Grid>
         <toolkit:MediaElement x:Name="MediaElement"
                               ShouldAutoPlay="False"
+                              ShouldShowPlaybackControls="True"
                               Aspect="AspectFit" />
 
         <Button Text="Fill"

@@ -21,13 +21,12 @@ namespace MovieWatch {
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("Rajdhani-SemiBold.ttf", "Rajdhani Semibold");
-                fonts.AddFont("Rajdhani-Medium.ttf", "Rajdhani Medium");
-                fonts.AddFont("Rajdhani-Bold.ttf", "Rajdhani Bold");
-                fonts.AddFont("JetBrainsMono-SemiBold.ttf", "Jetbrains Mono SemiBold");
-                fonts.AddFont("LobsterTwo-Bold.ttf", "LobsterTwo Bold");
-                fonts.AddFont("LobsterTwo-Medium.ttf", "LobsterTwo Medium");
-                fonts.AddFont("LobsterTwo-Regular.ttf", "LobsterTwo Regular");
+                fonts.AddFont("Rajdhani-SemiBold.ttf", "RajdhaniSemiBold");
+                fonts.AddFont("Rajdhani-Medium.ttf", "RajdhaniMedium");
+                fonts.AddFont("Rajdhani-Bold.ttf", "RajdhaniBold");
+                fonts.AddFont("JetBrainsMono-SemiBold.ttf", "JetBrainsMonoSemiBold");
+                fonts.AddFont("LobsterTwo-Bold.ttf", "LobsterTwoBold");
+                fonts.AddFont("LobsterTwo-Regular.ttf", "LobsterTwoRegular");
             });
 
 #if DEBUG

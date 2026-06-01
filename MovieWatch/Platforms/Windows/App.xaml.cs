@@ -4,6 +4,7 @@
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 #pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace MovieWatch.WinUI
 #pragma warning restore IDE0130
 {

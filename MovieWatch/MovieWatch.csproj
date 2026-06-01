@@ -38,13 +38,15 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<UseDefaultPublishRuntimeIdentifier Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">false</UseDefaultPublishRuntimeIdentifier>
+		<EnableMauiFontProcessing Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">false</EnableMauiFontProcessing>
 		<DefaultLanguage>en-US</DefaultLanguage>
 		<SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+		<BaseOutputPath>C:\Users\Spagget\source\repos\MovieWatch\MovieWatch\bin</BaseOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\movie_watch_icon.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -54,10 +56,28 @@
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 
 		<!-- Custom Fonts -->
-		<MauiFont Include="Resources\Fonts\*" />
+		<MauiFont Include="Resources\Fonts\OpenSans-Regular.ttf" Alias="OpenSansRegular" />
+		<MauiFont Include="Resources\Fonts\OpenSans-Semibold.ttf" Alias="OpenSansSemibold" />
+		<MauiFont Include="Resources\Fonts\Rajdhani-SemiBold.ttf" Alias="RajdhaniSemiBold" />
+		<MauiFont Include="Resources\Fonts\Rajdhani-Medium.ttf" Alias="RajdhaniMedium" />
+		<MauiFont Include="Resources\Fonts\Rajdhani-Bold.ttf" Alias="RajdhaniBold" />
+		<MauiFont Include="Resources\Fonts\JetBrainsMono-SemiBold.ttf" Alias="JetBrainsMonoSemiBold" />
+		<MauiFont Include="Resources\Fonts\LobsterTwo-Bold.ttf" Alias="LobsterTwoBold" />
+		<MauiFont Include="Resources\Fonts\LobsterTwo-Regular.ttf" Alias="LobsterTwoRegular" />
 
 		<!-- Raw Assets -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<AndroidAsset Include="Resources\Fonts\OpenSans-Regular.ttf" Link="OpenSans-Regular.ttf" />
+		<AndroidAsset Include="Resources\Fonts\OpenSans-Semibold.ttf" Link="OpenSans-Semibold.ttf" />
+		<AndroidAsset Include="Resources\Fonts\Rajdhani-SemiBold.ttf" Link="Rajdhani-SemiBold.ttf" />
+		<AndroidAsset Include="Resources\Fonts\Rajdhani-Medium.ttf" Link="Rajdhani-Medium.ttf" />
+		<AndroidAsset Include="Resources\Fonts\Rajdhani-Bold.ttf" Link="Rajdhani-Bold.ttf" />
+		<AndroidAsset Include="Resources\Fonts\JetBrainsMono-SemiBold.ttf" Link="JetBrainsMono-SemiBold.ttf" />
+		<AndroidAsset Include="Resources\Fonts\LobsterTwo-Bold.ttf" Link="LobsterTwo-Bold.ttf" />
+		<AndroidAsset Include="Resources\Fonts\LobsterTwo-Regular.ttf" Link="LobsterTwo-Regular.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -102,27 +122,20 @@
 		</MauiXaml>
 	</ItemGroup>
 
-	<Target Name="KeepOnlyEnglishWindowsResources"
-	        AfterTargets="Build"
-	        Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+	<Target Name="KeepOnlyEnglishWindowsResources" AfterTargets="Build" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
 		<ItemGroup>
-			<_NonEnglishMuiFiles Include="$(OutputPath)**\*.mui"
-			                     Exclude="$(OutputPath)en-us\**\*.mui;$(OutputPath)en-US\**\*.mui" />
+			<_NonEnglishMuiFiles Include="$(OutputPath)**\*.mui" Exclude="$(OutputPath)en-us\**\*.mui;$(OutputPath)en-US\**\*.mui" />
 			<_NonEnglishMuiDirectories Include="@(_NonEnglishMuiFiles->'%(RootDir)%(Directory)')" />
 		</ItemGroup>
 		<Delete Files="@(_NonEnglishMuiFiles)" />
 		<RemoveDir Directories="@(_NonEnglishMuiDirectories)" />
 	</Target>
 
-	<Target Name="CopyReleaseApkWithFriendlyName"
-	        AfterTargets="Build"
-	        Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' and '$(Configuration)' == 'Release'">
+	<Target Name="CopyReleaseApkWithFriendlyName" AfterTargets="Build" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' and '$(Configuration)' == 'Release'">
 		<ItemGroup>
 			<_SignedReleaseApk Include="$(OutputPath)*-Signed.apk" />
 		</ItemGroup>
-		<Copy SourceFiles="@(_SignedReleaseApk)"
-		      DestinationFiles="@(_SignedReleaseApk->'$(OutputPath)$(ApplicationTitle).apk')"
-		      SkipUnchangedFiles="true" />
+		<Copy SourceFiles="@(_SignedReleaseApk)" DestinationFiles="@(_SignedReleaseApk->'$(OutputPath)$(ApplicationTitle).apk')" SkipUnchangedFiles="true" />
 	</Target>
 
 </Project>

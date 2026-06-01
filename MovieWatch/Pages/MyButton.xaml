@@ -25,7 +25,7 @@
             <Label x:Name="ButtonLabel"
                    Text="Click Me"
                    TextColor="Black"
-                   FontFamily="Rajdhani Bold"
+                   FontFamily="RajdhaniBold"
                    FontSize="20"
                    CharacterSpacing="1"
                    HorizontalOptions="Center"
